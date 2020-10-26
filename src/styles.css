@@ -1,0 +1,22 @@
+/* You can add global styles to this file, and also import other style files */
+.col-form-label{
+    font-weight: 500 !important;
+}
+.card
+{
+    margin:3%;
+}
+.card-header,.center
+{
+    text-align:center;
+}
+.card-header{
+    background-color: aliceblue !important;
+}
+.swal2-popup{
+    font-size: 0.7rem !important;
+    width: 40em !important;
+}
+.swal2-html-container{
+    font-weight: bold;
+}

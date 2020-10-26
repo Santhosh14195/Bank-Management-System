@@ -1,0 +1,30 @@
+export class User {
+        id: string;
+        customerID: string;
+        name: string;
+        accNumber: string;
+        country: string;
+        state: string;
+        gender: string;
+        dob: string;
+        regDate: string;
+        bankName: string;
+        branchName: string;
+        idType: string;
+        idCardNo: string;
+        refAccName: string;
+        refAccNum: string;
+        refAccAddr: string;
+        addr: string;
+        cantactNo: string;
+        mailId: string;
+        marSts: string;
+        accType: string;
+        citizen: string;
+        citizenSts: string;
+        gudType: string;
+        gudName: string;
+        usrName:string;
+        passwd:string;
+        intDeposit:string;
+}

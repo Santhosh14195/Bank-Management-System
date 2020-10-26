@@ -1,0 +1,17 @@
+<nav class="navbar navbar-expand navbar-dark bg-bank" *ngIf="user">
+  <div class="collapse navbar-collapse">
+      <a class="nav-item nav-link fa fa-home" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> Home</a>
+      <a class="nav-item nav-link fa fa-edit" routerLink="/users" routerLinkActive="active"> Manage Account</a>
+      <a class="nav-item nav-link fa fa-sticky-note-o" routerLink="/loan" routerLinkActive="active"> Apply Loan</a>
+      
+  </div>
+  <div class="form-inline my-2 my-lg-0">
+    <a class="nav-item nav-link fa fa-sign-out" (click)="logout()"> Logout</a>
+  </div>
+</nav>
+
+<div class="app-container">
+  
+<router-outlet></router-outlet>
+</div>
+

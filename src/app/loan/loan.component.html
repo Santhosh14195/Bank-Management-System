@@ -1,0 +1,233 @@
+<div class="card"  *ngIf="userLoan.length>0">
+    <h4 class="card-header">Applied Loans</h4>
+    <div class="card-body">
+        <table class="table table-striped table-bordered table-responsive">
+            <thead>
+                <th>Loan Type</th>
+                <th>Loan Amount</th>
+                <th>Loan Apply Date</th>
+                <th>Loan Issued Date</th>
+                <th>Rate of interest</th>
+                <th>Duration of Loan</th>
+                <th>Loan Closed</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let loan of userLoan">
+                    <td>{{loan.loanTyp}}</td>
+                    <td>{{loan.loanAmt}}</td>
+                    <td>{{loan.loanApplyDt}}</td>
+                    <td>{{loan.loanIssueDt}}</td>
+                    <td>{{loan.rateOfInt}}</td>
+                    <td>{{loan.loanDuration}}</td>
+                    <td>{{loan.isClosed=="Y"?"Yes":"No"}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="card" *ngIf="showloan">
+    <h4 class="card-header">Apply Loan</h4>
+    <div class="card-body">
+        <form [formGroup]="loanform" (ngSubmit)="onSubmit()">
+            <div class="form-group row">
+                <label for="loanTyp" class="col-md-2 col-form-label text-md-right"> Loan Type</label>
+                <div class="col-md-3">
+                    <select formControlName="loanTyp" class="form-control" 
+                    (change)='onLoanTypeSelected($event)'
+                    [ngClass]="{ 'is-invalid': submitted && forms.loanTyp.errors }">
+                        <option value="" disabled>Select</option>
+                        <option *ngFor="let item of loanTyp">{{item}}</option>
+                      </select>
+                    <div *ngIf="submitted && forms.loanTyp.errors" class="invalid-feedback">
+                        <div *ngIf="forms.loanTyp.errors.required">Loan Type is required</div>
+                    </div>
+                </div>
+                <label for="loanAmt" class="col-md-2 col-form-label text-md-right"> Loan Amount </label>
+                <div class="col-md-3">
+                    <input type="text" formControlName="loanAmt" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && forms.loanAmt.errors }" />
+                    <div *ngIf="submitted && forms.loanAmt.errors" class="invalid-feedback">
+                        <div *ngIf="forms.loanAmt.errors.required">Loan Amount is required</div>
+                        <div *ngIf="forms.loanAmt.errors.pattern">Loan Amount should be numeric greater than zero and should contains only positive values</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="loanApplyDt" class="col-md-2 col-form-label text-md-right">Loan Apply Date</label>                
+                <div class="col-md-3">  
+                    <input type="text"
+                    #datepickerMDY="bsDatepicker"
+                    bsDatepicker
+                    formControlName="loanApplyDt" 
+                    class="form-control"
+                    [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"  
+                    [ngClass]="{ 'is-invalid': submitted && forms.loanApplyDt.errors }"
+                    disabled>
+                    <div *ngIf="submitted && forms.loanApplyDt.errors" class="invalid-feedback">
+                        <div *ngIf="forms.loanApplyDt.errors.required">Loan Apply Date is required</div>
+                    </div>
+                </div>
+                <label for="loanIssueDt" class="col-md-2 col-form-label text-md-right">Loan Issue Date</label>                
+                <div class="col-md-3">  
+                    <input type="text"
+                    #datepickerMDY="bsDatepicker"
+                    bsDatepicker
+                    placeholder="DD/MM/YYYY"
+                    formControlName="loanIssueDt" 
+                    class="form-control"
+                    [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }" 
+                     [ngClass]="{ 'is-invalid': submitted && forms.loanIssueDt.errors }">
+                    <div *ngIf="submitted && forms.loanIssueDt.errors" class="invalid-feedback">
+                        <div *ngIf="forms.loanIssueDt.errors.required">Loan Issue Date is required</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="rateOfInt" class="col-md-2 col-form-label text-md-right"> Rate Of interest</label>
+                <div class="col-md-3">
+                    <input disabled type="text" formControlName="rateOfInt" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && forms.rateOfInt.errors }" />
+                    <div *ngIf="submitted && forms.rateOfInt.errors" class="invalid-feedback">
+                        <div *ngIf="forms.rateOfInt.errors.required">Rate Of interest is required</div>
+                    </div>
+                    
+                </div>
+                <label for="loanDuration" class="col-md-2 col-form-label text-md-right"> Duration of the Loan </label>
+                <div class="col-md-3">
+                    <select formControlName="loanDuration" class="form-control" 
+                    [ngClass]="{ 'is-invalid': submitted && forms.loanDuration.errors }">
+                        <option value="" disabled>Select</option>
+                        <option *ngFor="let item of loanDuration">{{item.year}}</option>
+                      </select>
+                    <div *ngIf="submitted && forms.loanDuration.errors" class="invalid-feedback">
+                        <div *ngIf="forms.loanDuration.errors.required">Duration of the Loan is required</div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="showEducation">
+                <div class="form-group row">
+                    <label for="courseFee" class="col-md-2 col-form-label text-md-right"> Course Fee</label>
+                    <div class="col-md-3">
+                        <input type="text" formControlName="courseFee" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && forms.courseFee.errors }" />
+                        <div *ngIf="submitted && forms.courseFee.errors" class="invalid-feedback">
+                            <div *ngIf="forms.courseFee.errors.required">Course Fee is required</div>
+                        </div>
+                        
+                    </div>
+                    <label for="course" class="col-md-2 col-form-label text-md-right"> Course</label>
+                    <div class="col-md-3">
+                        <input type="text" formControlName="course" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && forms.course.errors }" />
+                        <div *ngIf="submitted && forms.course.errors" class="invalid-feedback">
+                            <div *ngIf="forms.course.errors.required">Course Fee is required</div>
+                        </div>                        
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="fatherName" class="col-md-2 col-form-label text-md-right"> Father Name</label>
+                    <div class="col-md-3">
+                        <input type="text" formControlName="fatherName" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && forms.fatherName.errors }" />
+                        <div *ngIf="submitted && forms.fatherName.errors" class="invalid-feedback">
+                            <div *ngIf="forms.fatherName.errors.required">Father Name is required</div>
+                            <div *ngIf="forms.fatherName.errors.pattern">Father Name should contain only alphabets and space</div>
+                        </div>
+                        
+                    </div>
+                    <label for="fatherOccptn" class="col-md-2 col-form-label text-md-right"> Father's Occupation</label>
+                    <div class="col-md-3">
+                        <input type="text" formControlName="fatherOccptn" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && forms.fatherOccptn.errors }" />
+                        <div *ngIf="submitted && forms.fatherOccptn.errors" class="invalid-feedback">
+                            <div *ngIf="forms.fatherOccptn.errors.required">Father's Occupation is required</div>
+                        </div>                        
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="fatherExp" class="col-md-2 col-form-label text-md-right"> Father's Total Experience</label>
+                    <div class="col-md-3">
+                        <input type="text" formControlName="fatherExp" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && forms.fatherExp.errors }" />
+                        <div *ngIf="submitted && forms.fatherExp.errors" class="invalid-feedback">
+                            <div *ngIf="forms.fatherExp.errors.required">Father's Total Experience is required</div>
+                        </div>
+                        
+                    </div>
+                    <label for="fatherCompany" class="col-md-2 col-form-label text-md-right"> Father's Experience with Current company</label>
+                    <div class="col-md-3">
+                        <input type="text" formControlName="fatherCompany" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && forms.fatherCompany.errors }" />
+                        <div *ngIf="submitted && forms.fatherCompany.errors" class="invalid-feedback">
+                            <div *ngIf="forms.fatherCompany.errors.required">Father's Experience with Current company is required</div>
+                        </div>                        
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="rationCrdNo" class="col-md-2 col-form-label text-md-right"> Ration Card No.</label>
+                    <div class="col-md-3">
+                        <input type="text" formControlName="rationCrdNo" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && forms.rationCrdNo.errors }" />
+                        <div *ngIf="submitted && forms.rationCrdNo.errors" class="invalid-feedback">
+                            <div *ngIf="forms.rationCrdNo.errors.required">Ration Card No is required</div>
+                        </div>
+                        
+                    </div>
+                    <label for="annualIncome" class="col-md-2 col-form-label text-md-right"> Annual Income</label>
+                    <div class="col-md-3">
+                        <input type="text" formControlName="annualIncome" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && forms.annualIncome.errors }" />
+                        <div *ngIf="submitted && forms.annualIncome.errors" class="invalid-feedback">
+                            <div *ngIf="forms.annualIncome.errors.required">Annual Income is required</div>
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+            <div  *ngIf="showPersonal">
+                <div class="form-group row">
+                    <label for="annualIncome" class="col-md-2 col-form-label text-md-right"> Annual Income</label>
+                    <div class="col-md-3">
+                        <input type="text" formControlName="annualIncome" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && forms.annualIncome.errors }" />
+                        <div *ngIf="submitted && forms.annualIncome.errors" class="invalid-feedback">
+                            <div *ngIf="forms.annualIncome.errors.required">Annual Income is required</div>
+                        </div>                        
+                    </div>
+                    <label for="companyName" class="col-md-2 col-form-label text-md-right"> Company Name</label>
+                    <div class="col-md-3">
+                        <input type="text" formControlName="companyName" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && forms.companyName.errors }" />
+                        <div *ngIf="submitted && forms.companyName.errors" class="invalid-feedback">
+                            <div *ngIf="forms.companyName.errors.required">Company Name is required</div>
+                        </div>                        
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="totalExp" class="col-md-2 col-form-label text-md-right"> Total Experience</label>
+                    <div class="col-md-3">
+                        <input type="text" formControlName="totalExp" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && forms.totalExp.errors }" />
+                        <div *ngIf="submitted && forms.totalExp.errors" class="invalid-feedback">
+                            <div *ngIf="forms.totalExp.errors.required">Total Experience is required</div>
+                        </div>                        
+                    </div>
+                    <label for="expCurComp" class="col-md-2 col-form-label text-md-right"> Experience with Current company</label>
+                    <div class="col-md-3">
+                        <input type="text" formControlName="expCurComp" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && forms.expCurComp.errors }" />
+                        <div *ngIf="submitted && forms.expCurComp.errors" class="invalid-feedback">
+                            <div *ngIf="forms.expCurComp.errors.required">Experience with Current company is required</div>
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+            <div class="form-group center">
+                <button [disabled]="loading" class="btn btn-success">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Apply
+                </button>&nbsp;&nbsp;&nbsp;
+                <a routerLink="../home" class="btn btn-danger">Cancel</a>
+            </div> 
+        </form>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+.bg-bank{
+background-color: #0061A0 !important;
+}
+a{
+    color: white !important;
+}
+.active{
+    color: gold !important;
+}
+.fa{
+    font-weight: bold !important;
+    font-size: 18px !important;
+}
