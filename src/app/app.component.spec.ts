@@ -13,21 +13,21 @@ import { Constants } from './app-helpers/constants';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DatePipe } from '@angular/common';
 
 
 describe('AppComponent', () => {
   const LoginModule = () => import('./login/login.module').then(x => x.LoginModule);
-const routes: Routes = [    
-  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
-  { path: 'users', component: UsersComponent},
-  { path: 'account', loadChildren: LoginModule},
-  { path: 'loan', component: LoanComponent},
-  //otherwise redirect to home
-  { path: '**', redirectTo: '' }
-];
+  const routes: Routes = [
+    { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+    { path: 'users', component: UsersComponent },
+    { path: 'account', loadChildren: LoginModule },
+    { path: 'loan', component: LoanComponent },
+    // otherwise redirect to home
+    { path: '**', redirectTo: '' }
+  ];
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
@@ -48,7 +48,7 @@ const routes: Routes = [
         LoanComponent
       ],
       providers: [
-        {provide:HttpClientModule},
+        { provide: HttpClientModule },
         DatePipe,
         Constants,
         AuthGuard
@@ -68,15 +68,24 @@ const routes: Routes = [
     expect(app.title).toEqual('Banking Management System');
   });
 
+  it('should call logout', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    spyOn(app, 'logout');
+    app.logout();
+    expect(app.logout).toHaveBeenCalledTimes(1);
+  });
+
   it('should logout', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
+    app.logout();
     expect(app.logout).toBeTruthy();
   });
 
   it('should not have user', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.user).toBeTruthy();
+    expect(app.user).toBeFalsy();
   });
 });

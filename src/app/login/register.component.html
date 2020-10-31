@@ -146,6 +146,7 @@
                     placeholder="DD/MM/YYYY"
                     [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"                    
                     (bsValueChange)="onDOBChange($event)"
+                    [maxDate]="maxDate"
                     [ngClass]="{ 'is-invalid': submitted && forms.dob.errors }">
                     <div *ngIf="submitted && forms.dob.errors" class="invalid-feedback">
                         <div *ngIf="forms.dob.errors.required">DOB is required</div>

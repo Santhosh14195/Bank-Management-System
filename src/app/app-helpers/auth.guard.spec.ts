@@ -8,7 +8,7 @@ describe('AuthGuard', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports:[RouterTestingModule,HttpClientTestingModule]
+      imports: [RouterTestingModule, HttpClientTestingModule]
     });
     guard = TestBed.inject(AuthGuard);
   });
@@ -16,5 +16,5 @@ describe('AuthGuard', () => {
   it('should be created', () => {
     expect(guard).toBeTruthy();
   });
-  
+
 });

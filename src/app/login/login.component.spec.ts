@@ -1,14 +1,15 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, fakeAsync } from '@angular/core/testing';
 import { Routes, RouterModule } from '@angular/router';
-import{ LoginComponent } from './login.component';
-import{ LayoutComponent } from './layout.component';
-import{ RegisterComponent } from './register.component';
+import { LoginComponent } from './login.component';
+import { LayoutComponent } from './layout.component';
+import { RegisterComponent } from './register.component';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginRoutingModule } from './login-routing.module';
 import { DatepickerModule, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-import {UserService} from '../services/user.service';
-import { HttpClientModule} from '@angular/common/http';
+import { UserService } from '../services/user.service';
+import { HttpClientModule } from '@angular/common/http';
+
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -19,24 +20,24 @@ describe('LoginComponent', () => {
       {
         path: '', component: LayoutComponent,
         children: [
-            { path: 'login', component: LoginComponent },
-            { path: 'register', component: RegisterComponent}
-              ]
+          { path: 'login', component: LoginComponent },
+          { path: 'register', component: RegisterComponent }
+        ]
       }
     ];
-    
+
     await TestBed.configureTestingModule({
-      imports: [ RouterModule.forRoot(routes),
+      imports: [RouterModule.forRoot(routes),
         CommonModule,
         LoginRoutingModule,
         ReactiveFormsModule,
         HttpClientModule,
-        BsDatepickerModule.forRoot(),
-        DatepickerModule.forRoot() ],
-      declarations: [ LoginComponent ],
-      providers:[UserService]
+      BsDatepickerModule.forRoot(),
+      DatepickerModule.forRoot()],
+      declarations: [LoginComponent],
+      providers: [UserService]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -55,8 +56,9 @@ describe('LoginComponent', () => {
       password: 'Q',
     };
     component.loginForm.setValue(credentials);
-    
-
-    //expect(component.onSubmit()).toBeTruthy();
+    spyOn(component, 'onSubmit');
+    component.onSubmit();
+    // expect(component.onSubmit).toHaveBeenCalledTimes(1);
+    expect(component.onSubmit).toBeTruthy();
   });
 });

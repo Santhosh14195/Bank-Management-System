@@ -13,8 +13,8 @@
                 </div>
                 <label for="name" class="col-md-2 col-form-label text-md-right"> Name</label>
                 <div class="col-md-3">
-                    <input type="text" formControlName="name" class="form-control" 
-                    disabled [ngClass]="{ 'is-invalid': submitted && forms.name.errors }" />
+                    <input type="text" formControlName="name" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && forms.name.errors }" />
                     <div *ngIf="submitted && forms.name.errors" class="invalid-feedback">
                         <div *ngIf="forms.name.errors.required">Name is required</div>
                         <div *ngIf="forms.name.errors.pattern">Name should contain only alphabets and space</div>
@@ -47,10 +47,10 @@
                 <label for="state" class="col-md-2 col-form-label text-md-right">State</label>                
                 <div class="col-md-3">
                     <select formControlName="state" class="form-control"
-                    [(ngModel)]="state"
+                    [(ngModel)]="stateModel"
                     [ngClass]="{ 'is-invalid': submitted && forms.state.errors }">
                         <option value="" disabled>Select State</option>
-                        <option *ngFor="let item of states">{{item}}</option>
+                        <option *ngFor="let item of states" [value]="item">{{item}}</option>
                       </select>
                     <div *ngIf="submitted && forms.state.errors" class="invalid-feedback">
                         <div *ngIf="forms.state.errors.required">State is required</div>
@@ -76,6 +76,7 @@
                     class="form-control"
                     [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"                    
                     (bsValueChange)="onDOBChange($event)"
+                    [maxDate]="maxDate"
                     [ngClass]="{ 'is-invalid': submitted && forms.dob.errors }">
                     <div *ngIf="submitted && forms.dob.errors" class="invalid-feedback">
                         <div *ngIf="forms.dob.errors.required">DOB is required</div>

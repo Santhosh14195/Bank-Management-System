@@ -24,7 +24,7 @@ export class User {
         citizenSts: string;
         gudType: string;
         gudName: string;
-        usrName:string;
-        passwd:string;
-        intDeposit:string;
+        usrName: string;
+        passwd: string;
+        intDeposit: string;
 }

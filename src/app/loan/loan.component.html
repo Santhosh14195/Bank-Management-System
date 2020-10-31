@@ -5,10 +5,10 @@
             <thead>
                 <th>Loan Type</th>
                 <th>Loan Amount</th>
-                <th>Loan Apply Date</th>
+                <th>Loan Applied Date</th>
                 <th>Loan Issued Date</th>
-                <th>Rate of interest</th>
-                <th>Duration of Loan</th>
+                <th>Rate of interest (%)</th>
+                <th>Duration of Loan (Yrs)</th>
                 <th>Loan Closed</th>
             </thead>
             <tbody>
@@ -76,6 +76,7 @@
                     formControlName="loanIssueDt" 
                     class="form-control"
                     [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }" 
+                    [minDate]="minDate"
                      [ngClass]="{ 'is-invalid': submitted && forms.loanIssueDt.errors }">
                     <div *ngIf="submitted && forms.loanIssueDt.errors" class="invalid-feedback">
                         <div *ngIf="forms.loanIssueDt.errors.required">Loan Issue Date is required</div>
@@ -92,7 +93,7 @@
                     </div>
                     
                 </div>
-                <label for="loanDuration" class="col-md-2 col-form-label text-md-right"> Duration of the Loan </label>
+                <label for="loanDuration" class="col-md-2 col-form-label text-md-right"> Duration of the Loan (Yrs)</label>
                 <div class="col-md-3">
                     <select formControlName="loanDuration" class="form-control" 
                     [ngClass]="{ 'is-invalid': submitted && forms.loanDuration.errors }">
@@ -121,6 +122,7 @@
                         [ngClass]="{ 'is-invalid': submitted && forms.course.errors }" />
                         <div *ngIf="submitted && forms.course.errors" class="invalid-feedback">
                             <div *ngIf="forms.course.errors.required">Course Fee is required</div>
+                            <div *ngIf="forms.course.errors.pattern">Course Fee should be numeric greater than zero and should contains only positive values</div>
                         </div>                        
                     </div>
                 </div>
@@ -179,6 +181,7 @@
                         [ngClass]="{ 'is-invalid': submitted && forms.annualIncome.errors }" />
                         <div *ngIf="submitted && forms.annualIncome.errors" class="invalid-feedback">
                             <div *ngIf="forms.annualIncome.errors.required">Annual Income is required</div>
+                            <div *ngIf="forms.annualIncome.errors.pattern">Annual Income should be numeric greater than zero and should contains only positive values</div>
                         </div>                        
                     </div>
                 </div>
@@ -191,6 +194,7 @@
                         [ngClass]="{ 'is-invalid': submitted && forms.annualIncome.errors }" />
                         <div *ngIf="submitted && forms.annualIncome.errors" class="invalid-feedback">
                             <div *ngIf="forms.annualIncome.errors.required">Annual Income is required</div>
+                            <div *ngIf="forms.annualIncome.errors.pattern">Annual Income should be numeric greater than zero and should contains only positive values</div>
                         </div>                        
                     </div>
                     <label for="companyName" class="col-md-2 col-form-label text-md-right"> Company Name</label>

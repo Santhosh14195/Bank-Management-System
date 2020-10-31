@@ -1,78 +1,81 @@
 export enum InitalDepositSavings
 {
-    AccountType = "Savings",
-    Amount = "5000"
+    AccountType = 'Savings',
+    Amount = '5000'
 }
 export enum InitalDepositSalaried
 {
-    AccountType = "Salaried",
-    Amount = "0"
+    AccountType = 'Salaried',
+    Amount = '0'
+}
+export enum RateofIntrest{
+  Personal = '11.25%',
+  Education = '9.5%'
 }
 export enum CitizenshipStatus
 {
-    Minor ='18',
+    Minor = '18',
     Normal = '19',
     Major = '61',
 }
 export class Constants{
-    idTypes=[{
-        "name":"Aadhaar card"
+    idTypes = [{
+        name: 'Aadhaar card'
      },
      {
-       "name":"Ration card No"
+       name: 'Ration card No'
      },
      {
-        "name":"Permanent account number (PAN) card"
+        name: 'Permanent account number (PAN) card'
      },
      {
-        "name":"Voter ID"
+        name: 'Voter ID'
      },
      {
-        "name":"Passport"
+        name: 'Passport'
      }];
-     
-     maritalStatus=[{
-       "name":"Single"
+
+     maritalStatus = [{
+       name: 'Single'
      },
      {
-       "name":"Married"
+       name: 'Married'
      }];
-   
-     accountType=[{
-       "name":"Savings"
+     accountType = [{
+       name: 'Savings'
      },
      {
-       "name":"Salaried"
+       name: 'Salaried'
      }];
 
      citizenStatus = [{
-       "name":"Minor"
+       name: 'Minor'
      },
      {
-       "name":"Normal"
+       name: 'Normal'
      },
      {
-       "name":"Senior"
+       name: 'Senior'
      }];
 
-     gudTypes=[{
-       "name":"Father"
+     gudTypes = [{
+       name: 'Father'
      },
      {
-       "name":"Husband"
+       name: 'Husband'
      }];
-     
-    loanTyp=["Education","Personal/Home"];
-    loanDuration=[{
-        "year":"5"
+
+loanTyp = ['Education', 'Personal/Home'];
+    loanDuration = [
+    {
+        year: '5'
     },
     {
-        "year":"10"
+        year: '10'
     },
     {
-        "year":"15"
+        year: '15'
     },
     {
-        "year":"20"
-    }];
-}
+        year: '20'
+    }]; }

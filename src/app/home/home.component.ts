@@ -8,12 +8,15 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   user;
-  constructor(private router:Router) { 
-    
+  constructor(private router: Router) {
+
   }
 
   ngOnInit(): void {
-    this.user=JSON.parse(localStorage.getItem("user"));  
+    this.user = JSON.parse(localStorage.getItem('user')) ? JSON.parse(localStorage.getItem('user')) : '';
+    if (!this.user) {
+      this.router.navigate(['/account/login']);
+    }
   }
 
 }

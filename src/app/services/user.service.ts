@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { User } from '../models/user';
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 
@@ -18,32 +18,27 @@ export class UserService {
     private http: HttpClient
   ) { }
 
-  getById(id: string) {
+  getById(id: string): any {
     return this.http.get<User>(`${environment.apiUrl}/users/${id}`);
-}
-register(user: User) {
-  return this.http.post(`${environment.apiUrl}/users`, user);
-}
-update(id, params) {
-  return this.http.put(`${environment.apiUrl}/users/${id}`, params)
-      .pipe(map(x => {                      
-          return x;
-      }));
-}
+  }
+  register(user: User): any {
+    return this.http.post(`${environment.apiUrl}/users`, user);
+  }
+  update(id, params): any {
+    return this.http.put(`${environment.apiUrl}/users/${id}`, params);
+  }
 
-getAll() {
-  return this.http.get<User[]>(`${environment.apiUrl}/users`);
-}
-user(){
-  if(localStorage.getItem("user"))
-    {
+  getAll(): any {
+    return this.http.get<User[]>(`${environment.apiUrl}/users`);
+  }
+  user(): boolean {
+    if (localStorage.getItem('user')) {
       return true;
     }
-    else
-    {
+    else {
       this.router.navigate(['/account/login']);
       return false;
     }
 
-}
+  }
 }

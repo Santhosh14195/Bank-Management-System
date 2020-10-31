@@ -7,12 +7,12 @@ import { environment } from '../../environments/environment';
 })
 export class LoanService {
 
-  constructor(private http: HttpClient) 
+  constructor(private http: HttpClient)
   { }
-  applyLaon(loan) {
+  applyLaon(loan): any {
     return this.http.post(`${environment.apiUrl}/loans`, loan);
   }
-  getAllLoan() {
+  getAllLoan(): any {
     return this.http.get<any[]>(`${environment.apiUrl}/loans`);
   }
 }

@@ -17,20 +17,22 @@ describe('LoanComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports:[ReactiveFormsModule,HttpClientTestingModule,RouterTestingModule],
-      declarations: [ LoanComponent ],
-      providers:[Constants,LoanService,DatePipe]
+      imports: [ReactiveFormsModule, HttpClientTestingModule, RouterTestingModule],
+      declarations: [LoanComponent],
+      providers: [Constants, LoanService, DatePipe]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LoanComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });
